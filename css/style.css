@@ -37,3 +37,8 @@ button{
 .form-group.active{
   display: block;
 }
+
+.form-group.new{
+  display: block;
+  border: 0;
+}
