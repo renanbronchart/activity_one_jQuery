@@ -4,7 +4,6 @@ body{
 
 .container{
   display: flex;
-  flex-direction: row;
   align-items: center;
 }
 
@@ -29,4 +28,12 @@ button{
 }
 
 
+.form-group{
+  display: none;
+  border-top: 1px solid gray;
+  padding: 10px 0;
+}
 
+.form-group.active{
+  display: block;
+}
