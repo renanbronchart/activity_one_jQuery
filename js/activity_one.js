@@ -2,17 +2,17 @@ var createForm = {
   init: function () {
     var self = this;
 
-      self.build();
+      self.changeForm();
   },
 
-  build: function() {
+  changeForm: function() {
     var self = this,
         $formGroup = $('aside .form-group');
 
     $('.init-form').on('click', function () {
       var attribute = $(this).attr('data-name');
 
-      $formGroup.find('label').attr('for', attribute).empty().append(attribute);
+      $formGroup.find('label').attr('for', attribute).empty().append($(this).text());
       $formGroup.find('input').val('');
       $formGroup.addClass('active');
     })
@@ -25,24 +25,42 @@ var createForm = {
     $formGroup.find('button.validate').on('click', function () {
       var valInput = $formGroup.find('input').val(),
           attribute = $formGroup.find('label').attr('for'),
-          $sectionLeft = $('section.left');
+          $sectionLeft = $('section.left'),
+          $newForm = $('section.left .form-group');
 
       if (attribute == 'label') {
-        var label = $sectionLeft.find('.form-group').append('<label></label>');
+        var label = '<label for=""></label>';
 
-        label.text(valInput);
+        $newForm.append(label);
+        $newForm.find('label').last().attr('for', valInput).text(valInput);
+
+        if ($newForm.find('label').length > 1) {
+          $newForm.find('label').last().before('<br/>');
+        }
       }else if(attribute == 'input'){
         var $input = '<input id=""/>';
 
-
-        if ($sectionLeft.find('.form-group label').length >= 1) {
-          $sectionLeft.find('.form-group label').last().after($input)
+        if ($newForm.find('label').length >= 1) {
+          $newForm.find('label').last().after($input)
 
         } else {
-          $sectionLeft.find('.form-group').append($input);
+          $newForm.append($input);
         }
 
-        $sectionLeft.find('.form-group input').attr('id', valInput);
+        $newForm.find('input').attr('id', valInput);
+        $newForm.find('input + input').remove();
+
+      } else if (attribute == 'button') {
+        var button = '<button></button>';
+
+        if (($newForm.find('label').length >= 1) && ($newForm.find('input').length >= 1)) {
+
+          $newForm.append(button);
+          $newForm.find('button + button').remove();
+
+          $newForm.find('button').last().text(valInput);
+        }
+
       }
 
     })

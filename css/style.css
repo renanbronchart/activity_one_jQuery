@@ -1,14 +1,16 @@
 body{
+  height: 100%;
   margin: 0;
 }
 
 .container{
+  height: 100%;
   display: flex;
   align-items: center;
 }
 
 section.left, aside.right{
-  height: 1000px;
+  min-height: 100%;
   padding: 20px;
 }
 
@@ -23,8 +25,8 @@ aside.right{
 }
 
 button{
-  margin: 20px 0;
   cursor: pointer;
+  margin: 20px 0;
 }
 
 
@@ -42,3 +44,19 @@ button{
   display: block;
   border: 0;
 }
+
+section.left button{
+  margin: 0;
+}
+
+section.left .form-group label{
+  display: inline-block;
+  margin: 0 20px 20px 0;
+}
+
+section.left .form-group button{
+  display: block;
+  margin: 0 0 40px 0;
+}
+
+
